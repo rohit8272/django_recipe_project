@@ -7,8 +7,12 @@ def recipe_add(request):
         description = request.POST.get('description')
         image = request.FILES['image']
         Recipe.objects.create(name = name , description = description , image = image)
-    
+
     recipes = Recipe.objects.all()
+
+    if request.GET.get('search'):
+        recipes = recipes.filter(name__icontains = request.GET.get('search'))
+
     context = {'recipes' : recipes}      
     return render(request, 'recipes_ui.html' , context)
 
