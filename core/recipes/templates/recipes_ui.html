@@ -12,18 +12,38 @@ table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
+
+table{
+    text-align: center;
+    background-color: antiquewhite;
+}
+
+td{
+ margin: 5px auto;
+}
+
+form{
+    border: 1px solid burlywood;
+    background-color: burlywood;
+}
 </style>
 
 </head>
 <body>
     
-    <form class="container mt-5" method="post" enctype="multipart/form-data">
+    <nav class="navbar navbar-expand-lg navbar-light bg-success d-flex justify-content-around">
+        <a class="navbar-brand" href="/">Recipe App</a>
+        <a class="btn btn-primary" href="/logout">Logout</a>
+
+    </nav>
+
+    <form style="text-align: center;" class="container mt-5 pt-3" method="post" enctype="multipart/form-data">
         {% csrf_token %}
     <label class="mx-4" for="name">Recipe name</label> 
     <input type="text" name="name" id="name"><br>
     
-    <label class="mx-4" for="description">Recipe descriptio </label> <br>
-    <textarea class="mx-4" name="description" id="description" cols="30" rows="10"></textarea><br>
+    <label class="m-4" for="description">Recipe descriptio </label> 
+    <textarea class="m-4" name="description" id="description" cols="30" rows="10"></textarea><br>
 
     <label class="mx-4" for="image">Recipe image</label> 
     <input type="file" name="image" id="image"><br>
@@ -32,8 +52,9 @@ table, th, td {
     </form>
 
 <hr>
-<form>
-    <div class="container mt-5 col-6">
+<form class="container my-3 py-4 col-6 bg-secondary
+">
+    <div >
         <label class="mx-4" for="search">Search food</label> 
         <input type="text" name="search" id="search">
         <button class="btn btn-primary"  type="submit">Search</button>
@@ -52,12 +73,10 @@ table, th, td {
         <tr>
             <td>{{ forloop.counter }}</td>
             <td> {{ recipe.name }}  </td>
-            <td> {{ recipe.description }}  </td>
-            <!-- <td>{{recipe.image }}</td> -->
-            <td> <img src="media/{{recipe.image }}" style="height: 100px;"> </td>
-            <td> <a href="recipe_delete/{{recipe.id}}/" class="btn btn-danger"> delete </a> </td>
-            <td> <a href="recipe_update/{{recipe.id}}/" class="btn btn-success"> update </a> </td>
-            
+            <td class="px-2 py-1"> {{ recipe.description }}  </td>
+            <td> <img src="/media/{{recipe.image}}" class="p-3" style="height: 130px; width: 130px;"> </td>
+            <td> <a href="recipe_delete/{{recipe.id}}/" class="btn btn-danger mx-2 my-2"> delete </a> 
+                <a href="recipe_update/{{recipe.id}}/" class="btn btn-success mx-2"> update </a> </td>     
         </tr>
     {% endfor %}
 </table>
